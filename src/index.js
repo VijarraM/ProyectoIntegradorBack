@@ -1,4 +1,4 @@
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const express = require('express');
 const router = require('./routes/index');
 const server = express();
