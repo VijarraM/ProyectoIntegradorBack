@@ -1,9 +1,9 @@
-const { DataTypes } = require("sequelize");
-const hashPassword = require("../utils/hashFunction");
+const { DataTypes } = require('sequelize');
+const hashPassword = require('../utils/hashFunction');
 
 module.exports = (sequelize) => {
   const User = sequelize.define(
-    "User",
+    'User',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
   });
 
   User.beforeUpdate(async (user) => {
-    if (user.changed("password")) {
+    if (user.changed('password')) {
       user.password = await hashPassword(user.password);
     }
     if (user.email) {

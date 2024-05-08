@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Favorite",
+    'Favorite',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -14,30 +14,30 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       status: {
-        type: DataTypes.ENUM("Alive", "Dead", "unknown"),
-        defaultValue: "Alive",
+        type: DataTypes.ENUM('Alive', 'Dead', 'unknown'),
+        defaultValue: 'Alive',
         allowNull: false,
       },
       species: {
         type: DataTypes.ENUM(
-          "Human",
-          "Humanoid",
-          "Alien",
-          "Animal",
-          "Robot",
-          "Disease",
-          "Parasite",
-          "Crononberg",
-          "Mythological Creature",
-          "Poopybutthole",
-          "unknown"
+          'Human',
+          'Humanoid',
+          'Alien',
+          'Animal',
+          'Robot',
+          'Disease',
+          'Parasite',
+          'Crononberg',
+          'Mythological Creature',
+          'Poopybutthole',
+          'unknown'
         ),
-        defaultValue: "unknown",
+        defaultValue: 'unknown',
         allowNull: false,
       },
       gender: {
-        type: DataTypes.ENUM("Male", "Female", "Genderless", "unknown"),
-        defaultValue: "unknown",
+        type: DataTypes.ENUM('Male', 'Female', 'Genderless', 'unknown'),
+        defaultValue: 'unknown',
         allowNull: false,
       },
       origin: {
