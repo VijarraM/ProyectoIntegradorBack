@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 
 // Función para crear un hash de contraseña
 async function hashPassword(password) {
