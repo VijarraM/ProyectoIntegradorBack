@@ -4,10 +4,10 @@ const bcrypt = require('bcryptjs');
 async function login(req, res) {
   try {
     const { email, password } = req.query;
-    if (!email || !password) res.status(400).json('Faltan datos');
+    if (!email || !password) res.status(400).json({ message: 'Faltan datos', access: false });
     else {
       const findUser = await User.findOne({ where: { email: email } });
-      if (!findUser) res.status(404).json('Usuario no encontrado');
+      if (!findUser) res.status(404).json({ message: 'Usuario no encontrado', access: false });
       else {
         const passwordCompared = await bcrypt.compare(password, findUser.password);
         if (passwordCompared) {
@@ -15,7 +15,11 @@ async function login(req, res) {
             access: true,
             user: findUser.id,
           });
-        } else res.status(403).json('Contraseña incorrecta');
+        } else
+          res.status(403).json({
+            message: 'Contraseña incorrecta',
+            access: false,
+          });
       }
     }
   } catch (error) {
