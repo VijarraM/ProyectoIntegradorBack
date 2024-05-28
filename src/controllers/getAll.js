@@ -9,7 +9,7 @@ const getAll = async (req, res) => {
     if (!page) {
       page = 1;
     }
-    const baseUrl = 'http://localhost:3001/rickandmorty/characters';
+    const baseUrl = 'https://proyectointegradorback.onrender.com/rickandmorty/characters';
     const next = `${baseUrl}?page=${Number(page) + 1}`;
     const prev = `${baseUrl}?page=${Number(page) - 1}`;
 
