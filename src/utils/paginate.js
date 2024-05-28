@@ -1,33 +1,17 @@
 const Paginado = (page, limit, data) => {
-  //   console.log(characters);
   const currentPage = page ? parseInt(page) : 1;
-  const limitPage = limit ? parseInt(limit) : 8;
+  const limitPage = limit ? parseInt(limit) : 20;
   const offset = (currentPage - 1) * limitPage;
 
-  const baseUrl = 'https://rickandmortyapi.com/api/character/';
   const characters = data.results;
-
-  let previousPage = '';
-
-  if (currentPage !== 1) {
-    previousPage = `${baseUrl}?page=${Math.max(1, currentPage - 1)}&limit=${limit}`;
-  } else {
-    previousPage = null;
-  }
-
-  const totalItems = Array.isArray(characters) ? characters.length : 0; // Verificar si characters es un array
-
-  const totalPages = Math.ceil(totalItems / limitPage);
-
-  let nextPage = null;
-
-  if (currentPage < totalPages) {
-    nextPage = `${baseUrl}?page=${currentPage + 1}&limit=${limit}`;
-  }
+  let previousPage = data.info.prev;
+  let nextPage = data.info.next;
+  const totalPages = data.info.pages;
+  const totalItems = data.info.count;
 
   // Verificar si characters es un array antes de usar slice()
   const limitedCharacters = Array.isArray(characters)
-    ? characters.slice(offset, offset + limitPage > 8 ? 8 : offset + limitPage).map((character) => ({
+    ? characters.slice(offset, offset + limitPage).map((character) => ({
         id: character.id,
         name: character.name,
         status: character.status,
@@ -38,15 +22,16 @@ const Paginado = (page, limit, data) => {
         location: character.location.name,
         image: character.image,
       }))
-    : []; // Si no es un array, devolver un array vacío
+    : [];
+  // Si no es un array, devolver un array vacío
 
   const resultado = {
     previousPage,
     nextPage,
-    limitPage,
+    totalPages,
     currentPage,
-    offset,
-    characters: limitedCharacters, // Devolver solo los primeros 8 personajes
+    totalItems,
+    characters: limitedCharacters,
   };
 
   return resultado;

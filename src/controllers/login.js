@@ -11,9 +11,11 @@ async function login(req, res) {
       else {
         const passwordCompared = await bcrypt.compare(password, findUser.password);
         if (passwordCompared) {
-          res.json({
+          nameInicial = findUser.name[0].toUpperCase();
+          res.status(200).json({
             access: true,
             user: findUser.id,
+            nameInicial,
           });
         } else
           res.status(403).json({
