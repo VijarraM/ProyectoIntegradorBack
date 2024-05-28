@@ -26,7 +26,6 @@ const getAll = async (req, res) => {
       location: character.location.name,
       image: character.image,
     }));
-
     res.json({
       next,
       prev,
